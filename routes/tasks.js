@@ -4,13 +4,7 @@ const {getAllTask, getTaskById, addTask ,upadateItem, deleteItem} = require("../
 
 // /api/v1/tasks/
 // get items
-router.route('/').get(getAllTask)
-router.route('/:id').get(getTaskById)
-router.route('/').post(addTask)
-router.route('/:id').get(upadateItem)
-router.route('/:id').get(deleteItem)
-
-
-
+router.route('/').get(getAllTask).post(addTask)
+router.route('/:id').get(getTaskById).patch(upadateItem).delete(deleteItem)
 
 module.exports = router
