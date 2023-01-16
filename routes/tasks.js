@@ -1,3 +1,5 @@
+// Representational State Transfer: REST
+// Create Read Update Delete Execute: CRUDE
 const express = require("express")
 const router = express.Router()
 const {getAllTask, getTaskById, addTask ,upadateTask, deleteTask} = require("../controller/task")

@@ -1,16 +1,19 @@
 
+
 const getAllTask = ((req,res) =>{
     res.send(" All Tasks")
 })
 
-
-const addTask = ((req,res) =>{
-    res.send("New task added")
+const getTaskById = ((req,res) =>{
+    // test  params
+    res.json({id:req.body.params.id})
 })
 
 
-const getTaskById = ((req,res) =>{
-    res.send(" Task")
+const addTask = ((req,res) =>{
+
+    //test content added
+    res.json(req.body)
 })
 
 
