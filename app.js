@@ -1,9 +1,18 @@
-console.log("test")
+
 const express = require("express")
 const app = express()
 const tasks = require("./routes/tasks")
+
+// acess .env file
+// need dotenv package
+require('dotenv').config()
+
 // port
 const port = 3000
+
+// db connection
+const connectDB = require('./db/connect')
+
 
 // middleware
 // parse json data
@@ -20,6 +29,18 @@ app.get('/hello', (req,res) =>{
 app.use('/api/v1/tasks', tasks)
 
 
-app.listen(port, () =>{
-    console.log(`Server is listening to port ${port}`)
-})
+// if connected start up server
+
+const start = async() => {
+    try {
+        // pass .env MONGO_URI to connectDB function
+        await connectDB(process.env.MONGO_URI)
+        app.listen(port,  console.log(`Server is listening to port ${port}...`))
+        
+    } catch (error) {
+        
+        console.log(error)
+    }
+}
+
+start()
