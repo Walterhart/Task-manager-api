@@ -1,29 +1,34 @@
 
+const Task = require('../models/task')
 
-const getAllTask = ((req,res) =>{
+const getAllTask = (req,res) =>{
     res.send(" All Tasks")
-})
+}
 
-const getTaskById = ((req,res) =>{
+const getTaskById = (req,res) =>{
     // test  params
     res.json({id:req.body.params.id})
-})
+}
 
 
-const addTask = ((req,res) =>{
+const addTask = async (req,res) =>{
 
     //test content added
-    res.json(req.body)
-})
+    const task = await Task.create(req.body)
+   
+    res.status(201).json({task})
+    // test  params in postman
+    // res.json({id:req.body.params.id})
+}
 
 
-const upadateTask = ((req,res) =>{
+const upadateTask = (req,res) =>{
     res.send(" Task updated")
-})
+}
 
-const deleteTask =((req,res) =>{
+const deleteTask =(req,res) =>{
     res.send("Task deleted")
-})
+}
 
 module.exports={
     getAllTask,
