@@ -7,11 +7,6 @@ const getAllTask = async(req,res) =>{
     try {
         const tasks = await Task.find({})
         res.status(200).send({tasks})
-        // if cant find item
-        if(!task){
-            return res.status(404). json({ms:`No task with id: ${taskID}`})
-        }
-        
     } catch (error) {
         res.status(500).json({msg:error})
         
