@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const tasks = require("./routes/tasks")
 const error404 = require("./middleware/error-404")
+const errorhandler = require("./middleware/errorHandler")
 
 // acess .env file
 // need dotenv package
@@ -28,6 +29,10 @@ app.use('/api/v1/tasks', tasks)
 // placement matter
 // similar to a default 
 app.use(error404)
+
+//error handling 
+app.use(errorhandler)
+
 // if connected start up server
 const start = async() => {
     try {
