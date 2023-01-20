@@ -2,6 +2,7 @@
 const express = require("express")
 const app = express()
 const tasks = require("./routes/tasks")
+const error404 = require("./middleware/error-404")
 
 // acess .env file
 // need dotenv package
@@ -20,15 +21,14 @@ app.use(express.json())
 app.use(express.static("./public"))
 
 // routes
-app.get('/hello', (req,res) =>{
-    res.send("Made it")
-})
-
 // url will use tasks reference for api
 app.use('/api/v1/tasks', tasks)
 
+// display error for page that does not exist
+// placement matter
+// similar to a default 
+app.use(error404)
 // if connected start up server
-
 const start = async() => {
     try {
         // pass .env MONGO_URI to connectDB function

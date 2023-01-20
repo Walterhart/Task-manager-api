@@ -3,10 +3,13 @@ const { find, findByIdAndUpdate } = require('../models/task')
 const Task = require('../models/task')
 
 const getAllTask = async(req,res) =>{
-
     try {
         const tasks = await Task.find({})
-        res.status(200).send({tasks})
+            res.status(200).send({tasks})
+        // amount of task
+        // res.status(200).send({tasks, amount: tasks.length})
+        // note: data is already a property for front end axois
+        // res.status(200).send(sucess:true, data:{tasks,nbHits:tasks.length)
     } catch (error) {
         res.status(500).json({msg:error})
         
@@ -30,8 +33,6 @@ const getTaskById = async(req,res) =>{
 
 
 const addTask = async (req,res) =>{
-
-    
     try {
         // test content added
         const task = await Task.create(req.body)
@@ -48,7 +49,6 @@ const addTask = async (req,res) =>{
 
 
 const upadateTask = async(req,res) =>{
-
    try {
     const {id:taskID}= req.params
     // new: new value, runValidators: run validators
