@@ -35,13 +35,16 @@ const addTask = asyncWrapper( async (req,res) =>{
 }
 )
 
-const upadateTask = asyncWrapper( async(req,res) =>{
+const upadateTask = asyncWrapper( async(req,res, next) =>{
     const {id:taskID}= req.params
     // new: new value, runValidators: run validators
     const task = await Task.findOneAndUpdate({_id:taskID}, req.body, {new:true, runValidators:true,})
     // test in postman find id and show bod
     //res.status(200).json({id:taskId, data:req.body})
     if(!task){
+        const error = new Error('Not Found')
+        error.status = 404
+        return next(error)
         return res.status(404).json({msg: `No task with id: ${taskID}`})
     }
     res.status(200).json({task})
