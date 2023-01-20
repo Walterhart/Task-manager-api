@@ -10,7 +10,8 @@ const errorhandler = require("./middleware/errorHandler")
 require('dotenv').config()
 
 // port
-const port = 3000
+// allow for custom port for deployment
+const port = process.env.PORT || 3000
 
 // db connection
 const connectDB = require('./db/connect')
