@@ -13,11 +13,10 @@ const port = 3000
 // db connection
 const connectDB = require('./db/connect')
 
-
 // middleware
 // parse json data
 app.use(express.json())
-
+// use public files
 app.use(express.static("./public"))
 
 // routes
@@ -27,7 +26,6 @@ app.get('/hello', (req,res) =>{
 
 // url will use tasks reference for api
 app.use('/api/v1/tasks', tasks)
-
 
 // if connected start up server
 
