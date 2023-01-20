@@ -2,6 +2,8 @@
 const { find, findByIdAndUpdate } = require('../models/task')
 const Task = require('../models/task')
 const asyncWrapper= require("../middleware/async")
+const {createCustomerError} = require('../errors/custom-error')
+
 
 const getAllTask = asyncWrapper (async(req,res) =>{
    
@@ -18,7 +20,7 @@ const getTaskById = asyncWrapper (async(req,res) =>{
         const task = await Task.findOne({_id: taskID})
         console.log(task)
         if(!task){
-            return res.status(404).json({msg: `No task with id: ${taskID}`})
+            return next(createCustomerError(`No task with id: ${taskID}`,404))
         }
         res.status(200).json({task})
 })
@@ -42,10 +44,8 @@ const upadateTask = asyncWrapper( async(req,res, next) =>{
     // test in postman find id and show bod
     //res.status(200).json({id:taskId, data:req.body})
     if(!task){
-        const error = new Error('Not Found')
-        error.status = 404
-        return next(error)
-        return res.status(404).json({msg: `No task with id: ${taskID}`})
+        return next(createCustomerError(`No task with id: ${taskID}`,404))
+
     }
     res.status(200).json({task})
    
@@ -56,7 +56,7 @@ const deleteTask = asyncWrapper(async(req,res) =>{
         const{id:taskID} = req.params
         const task = await Task.findOneAndDelete({_id:taskID})
         if(!task){
-            return res.status(404).json({msg: `No task with id: ${taskID}`})
+            return next(createCustomerError(`No task with id: ${taskID}`,404))
         }
         res.status(200).json({task})
     
